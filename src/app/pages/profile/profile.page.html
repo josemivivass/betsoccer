@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mi Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="saveProfile()">
+        <ion-icon slot="icon-only" name="save-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-bg ion-padding">
+  
+  <div class="profile-card">
+    <div class="current-avatar-container">
+      <div class="avatar-circle">
+        <ion-icon [name]="user.avatar" class="main-icon"></ion-icon>
+      </div>
+           
+      <div class="edit-badge">
+        <ion-icon name="pencil"></ion-icon>
+      </div>
+    </div>
+
+    <h2 class="username">{{ user.username || 'Usuario' }}</h2>
+    <p class="email">{{ user.email || 'usuario@email.com' }}</p>
+
+    <div class="divider"></div>
+
+    <h3 class="section-title">Elige tu Icono</h3>
+    <div class="avatar-grid">
+      <div 
+        class="avatar-option" 
+        *ngFor="let icon of availableAvatars"
+        (click)="selectAvatar(icon)"
+        [class.selected]="user.avatar === icon">
+        
+        <div class="icon-wrapper">
+          <ion-icon [name]="icon"></ion-icon>
+        </div>
+
+        <div class="check-mark" *ngIf="user.avatar === icon">✓</div>
+      </div>
+    </div>
+
+    <ion-button expand="block" color="primary" class="ion-margin-top" (click)="saveProfile()">
+      Guardar Cambios
+    </ion-button>
+
+    <ion-button expand="block" fill="outline" color="danger" class="ion-margin-top" (click)="logout()">
+      <ion-icon slot="start" name="log-out-outline"></ion-icon>
+      Cerrar Sesión
+    </ion-button>
+
+  </div>
+
+</ion-content>

@@ -1,0 +1,157 @@
+.app-bg {
+  --background: #f4f5f8;
+}
+
+//Contenedor principal
+.main-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+//Tarjeta Principal
+.team-header-card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  margin-top: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  position: relative;
+  border-left: 5px solid var(--ion-color-primary);
+
+  .logo-container {
+    background: white;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+    
+    .team-logo {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+    }
+  }
+
+  .team-info {
+    flex: 1;
+    h1 { margin: 0; font-weight: 800; font-size: 2rem; color: #1e2023; }
+    p { margin: 5px 0 0; color: #888; font-weight: 500; }
+  }
+
+  .team-rank-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .divider { width: 1px; height: 40px; background: #eee; }
+
+    .rank-item {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      
+      .value { font-size: 1.8rem; font-weight: 900; color: #1e2023; line-height: 1; }
+      .label { font-size: 0.7rem; font-weight: 700; color: #aaa; letter-spacing: 1px; margin-top: 5px; }
+    }
+  }
+}
+
+//Grid de contenido
+.content-grid {
+  padding: 0;
+  margin-top: 30px;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #1e2023;
+  margin-bottom: 15px;
+}
+
+//Estadísticas
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+
+  .stat-box {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+
+    .stat-value { display: block; font-size: 1.8rem; font-weight: 800; margin-bottom: 5px; }
+    .stat-label { font-size: 0.65rem; font-weight: 700; color: #aaa; letter-spacing: 0.5px; }
+
+    .text-blue { color: var(--ion-color-primary); }
+    .text-gray { color: #95a5a6; }
+    .text-red { color: var(--ion-color-danger); }
+    .text-dark { color: #2c3e50; }
+  }
+}
+
+//Plantilla
+.roster-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  h3 { margin: 0; }
+}
+
+.roster-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  overflow: hidden;
+}
+
+.player-row {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #f8f9fa;
+  &:last-child { border-bottom: none; }
+
+  .player-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f0f2f5;
+    margin-right: 15px;
+  }
+
+  .player-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    .name { font-weight: 700; color: #2c3e50; font-size: 0.95rem; }
+    .role { font-size: 0.8rem; color: #999; }
+  }
+
+  .player-stats {
+    text-align: center;
+    .goals { display: block; font-weight: 800; font-size: 1.1rem; color: #2c3e50; }
+    .label { font-size: 0.6rem; font-weight: 700; color: #aaa; }
+  }
+}
+
+//Responsive
+@media (max-width: 768px) {
+  .team-header-card {
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20px;
+    
+    .team-rank-info { width: 100%; justify-content: center; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px; }
+    .divider { display: none; }
+    .rank-item { margin: 0 20px; }
+  }
+}

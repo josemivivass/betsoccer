@@ -1,0 +1,209 @@
+.app-bg {
+  --background: #f4f5f8;
+}
+
+.main-container {
+  padding: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// TARJETA MARCADOR
+.score-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+  border-left: 5px solid var(--ion-color-primary);
+
+  .team-block {
+    text-align: center;
+    width: 30%;
+    
+    .big-logo {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+    
+    h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 5px 0;
+      color: #333;
+    }
+
+    span {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      &.badge-home { background: #e3f2fd; color: #1976d2; }
+      &.badge-away { background: #f3e5f5; color: #7b1fa2; }
+    }
+  }
+
+  .score-block {
+    text-align: center;
+    flex: 1;
+
+    .score {
+      font-size: 3rem;
+      font-weight: 900;
+      margin: 0;
+      color: #1e2023;
+    }
+
+    .status-badge {
+      display: inline-block;
+      background: #eee;
+      color: #666;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-top: 5px;
+
+      &.live {
+        background: #ffebee;
+        color: #d32f2f;
+        animation: pulse 2s infinite;
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+// EVENTOS
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #333;
+  margin-left: 5px;
+}
+
+.events-card {
+  background: white;
+  border-radius: 16px;
+  padding: 0 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.event-row {
+  display: flex;
+  align-items: center;
+  padding: 15px 10px;
+  border-bottom: 1px solid #f0f0f0;
+  &:last-child { border-bottom: none; }
+
+  .event-minute {
+    font-weight: 700;
+    color: #666;
+    width: 35px;
+    text-align: center;
+    margin-right: 10px;
+    font-size: 0.9rem;
+  }
+
+  .mini-logo { 
+    width: 30px; 
+    height: 30px; 
+    object-fit: contain; 
+    margin-right: 15px; 
+  }
+  
+  .event-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    .player-name { font-weight: 700; font-size: 0.95rem; color: #1e2023; }
+    .event-desc { font-size: 0.8rem; color: #888; }
+  }
+
+  .running-score { 
+    font-weight: 800; 
+    font-size: 1.2rem; 
+    color: #333;
+    background: #f8f9fa;
+    padding: 5px 10px;
+    border-radius: 8px;
+  }
+}
+
+// CHAT
+.chat-container {
+  background: white;
+  border-radius: 16px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.chat-header {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  font-weight: 700;
+  color: #333;
+  background: #fff;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: #f4f5f8;
+
+  .message {
+    display: flex;
+    margin-bottom: 10px;
+    
+    .msg-bubble {
+      background: white;
+      padding: 8px 12px;
+      border-radius: 12px;
+      border-top-left-radius: 2px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      max-width: 85%;
+    }
+
+    .msg-user { font-size: 0.7rem; color: var(--ion-color-primary); font-weight: 700; display: block; margin-bottom: 2px; }
+    p { margin: 0; font-size: 0.9rem; color: #333; line-height: 1.4; }
+    .msg-time { font-size: 0.65rem; color: #999; float: right; margin-top: 5px; margin-left: 10px;}
+
+    &.me {
+      justify-content: flex-end;
+      .msg-bubble {
+        background: #e3f2fd;
+        border-radius: 12px;
+        border-top-right-radius: 2px;
+      }
+    }
+  }
+}
+
+.chat-input-area {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 10px;
+  background: white;
+
+  ion-input {
+    background: #f0f2f5;
+    border-radius: 20px;
+    --padding-start: 15px;
+  }
+}

@@ -1,0 +1,57 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <b>Ranking Global</b><br>
+      <small style="font-size: 0.8rem; font-weight: normal; opacity: 0.9;">Top Jugadores</small>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-bg">
+  <ion-refresher slot="fixed" (ionRefresh)="loadRanking($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="podium-container ion-padding" *ngIf="!loading && topThree.length > 0">
+    <div class="podium-card" *ngFor="let user of topThree" [class.winner]="user.position === 1">
+      
+      <div class="trophy-badge" *ngIf="user.position === 1">
+        <ion-icon name="trophy"></ion-icon>
+      </div>
+
+      <div class="avatar-placeholder">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </div>
+      
+      <h2 class="points">{{ user.points }} pts</h2>
+      <div class="rank-badge">#{{ user.position }}</div>
+      <p class="username">{{ user.username }}</p>
+    </div>
+  </div>
+
+  <div class="list-container ion-padding-horizontal ion-padding-bottom" *ngIf="!loading">
+    <div class="ranking-table">
+      <div class="table-header">
+        <div class="col-pos">Posición</div>
+        <div class="col-user">Usuario</div>
+        <div class="col-pts">Puntos</div>
+      </div>
+
+      <div class="table-row" *ngFor="let user of restList">
+        <div class="col-pos rank-num">{{ user.position }}</div>
+        <div class="col-user user-info">
+          <ion-icon name="person-circle-outline" class="mini-avatar"></ion-icon>
+          <span>{{ user.username }}</span>
+        </div>
+        <div class="col-pts points-num">{{ user.points }}</div>
+      </div>
+
+       <div *ngIf="topThree.length === 0 && restList.length === 0" class="ion-text-center ion-padding muted-text">
+          No hay datos de ranking disponibles.
+       </div>
+    </div>
+  </div>
+</ion-content>

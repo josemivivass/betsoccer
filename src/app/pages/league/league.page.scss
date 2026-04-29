@@ -1,0 +1,78 @@
+.app-bg {
+  --background: #f4f5f8;
+}
+
+.table-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.league-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+
+  thead {
+    background: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+    
+    th {
+      padding: 12px 8px;
+      text-align: center;
+      font-weight: 700;
+      color: #6c757d;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+
+      &.team { text-align: left; padding-left: 15px; }
+    }
+  }
+
+  tbody tr {
+    border-bottom: 1px solid #f1f3f5;
+    
+    &.ucl { box-shadow: inset 4px 0 0 #2ecc71; }
+    &.uel { box-shadow: inset 4px 0 0 #f1c40f; }
+    &.relegation { box-shadow: inset 4px 0 0 #e74c3c; background: #fff5f5; }
+  }
+
+  td {
+    padding: 10px 8px;
+    text-align: center;
+    color: #343a40;
+    vertical-align: middle;
+
+    &.pos { font-weight: 600; color: #868e96; width: 40px; }
+    
+    &.team-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+      
+      .mini-shield {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+      }
+      .name { font-weight: 600; }
+    }
+
+    &.pts { font-weight: 800; font-size: 1rem; color: #1e2023; }
+  }
+}
+
+@media (max-width: 600px) {
+  .mobile-hide { display: none; }
+  .name { 
+    max-width: 120px; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+  }
+}

@@ -1,0 +1,103 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary" style="--background: #3880ff;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/liga" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle del Equipo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-bg">
+  
+  <div *ngIf="loading" class="ion-text-center ion-padding ion-margin-top">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+
+  <div *ngIf="!loading && teamStats" class="main-container animate__animated animate__fadeIn">
+    
+    <div class="team-header-card">
+      <div class="logo-container">
+        <img [src]="getLogo(teamStats.name)" 
+             class="team-logo"
+             onError="this.onerror=null; this.src='assets/icon/favicon.png'">
+      </div>
+      
+      <div class="team-info">
+        <h1>{{ teamStats.name }}</h1>
+        <p>Temporada 2025-2026 • La Liga</p>
+      </div>
+
+      <div class="team-rank-info">
+        <div class="rank-item">
+          <span class="value">{{ teamStats.points }}</span>
+          <span class="label">PUNTOS</span>
+        </div>
+        <div class="divider"></div>
+        <div class="rank-item">
+          <span class="value">#{{ teamStats.rank }}</span>
+          <span class="label">POSICIÓN</span>
+        </div>
+      </div>
+    </div>
+
+    <ion-grid class="content-grid">
+      <ion-row>
+        
+        <ion-col size="12" size-md="4">
+          <h3 class="section-title">Estadísticas</h3>
+          
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span class="stat-value text-blue">{{ teamStats.won }}</span>
+              <span class="stat-label">VICTORIAS</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value text-gray">{{ teamStats.drawn }}</span>
+              <span class="stat-label">EMPATES</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value text-red">{{ teamStats.lost }}</span>
+              <span class="stat-label">DERROTAS</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-value text-dark">{{ teamStats.goalsFor }}</span>
+              <span class="stat-label">GOLES FAVOR</span>
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="12" size-md="8">
+          <div class="roster-header">
+            <h3 class="section-title">Plantilla</h3>
+            <ion-badge color="light">{{ players.length }} JUGADORES</ion-badge>
+          </div>
+
+          <div class="roster-card">
+            <div class="player-row" *ngFor="let player of players">
+              
+              <div class="player-avatar">
+                <img [src]="'https://api.dicebear.com/7.x/avataaars/svg?seed=' + player.name" alt="face">
+              </div>
+
+              <div class="player-info">
+                <span class="name">{{ player.name }}</span>
+                <span class="role">Jugador</span>
+              </div>
+
+              <div class="player-stats">
+                <span class="goals">{{ player.goals || 0 }}</span>
+                <span class="label">GOLES</span>
+              </div>
+            </div>
+
+            <div *ngIf="players.length === 0" class="ion-text-center ion-padding text-muted">
+              No hay información de plantilla disponible.
+            </div>
+          </div>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+  </div>
+</ion-content>

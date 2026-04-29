@@ -1,0 +1,25 @@
+.auth-bg {
+  --background: #f4f5f8;
+}
+
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 16px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: white;
+
+  ion-card-title {
+    color: #007bff;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+}

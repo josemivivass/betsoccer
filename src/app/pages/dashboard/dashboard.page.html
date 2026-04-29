@@ -1,0 +1,107 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      <b>Panel de Partidos</b>
+    </ion-title>
+    
+  </ion-toolbar>
+
+  <ion-toolbar color="primary">
+    <ion-searchbar 
+      placeholder="Buscar equipo..." 
+      (ionInput)="onSearchChange($event)"
+      [debounce]="250"
+      style="--background: rgba(255,255,255,0.2); --color: white; --placeholder-color: white; --icon-color: white; border-radius: 8px;">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="app-bg">
+  
+  <ion-refresher slot="fixed" (ionRefresh)="loadMatches($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="filters-wrapper">
+    <div class="filters-container ion-padding-horizontal">
+      <ion-chip [color]="filterStatus === 'ALL' ? 'primary' : 'medium'" (click)="setFilter('ALL')" [outline]="filterStatus !== 'ALL'">
+        <ion-label>Todos</ion-label>
+      </ion-chip>
+      <ion-chip [color]="filterStatus === 'LIVE' ? 'danger' : 'medium'" (click)="setFilter('LIVE')" [outline]="filterStatus !== 'LIVE'">
+        <ion-label>En Vivo</ion-label>
+      </ion-chip>
+      <ion-chip [color]="filterStatus === 'PENDING' ? 'tertiary' : 'medium'" (click)="setFilter('PENDING')" [outline]="filterStatus !== 'PENDING'">
+        <ion-label>Próximos</ion-label>
+      </ion-chip>
+      <ion-chip [color]="filterStatus === 'FINISHED' ? 'success' : 'medium'" (click)="setFilter('FINISHED')" [outline]="filterStatus !== 'FINISHED'">
+        <ion-label>Finalizados</ion-label>
+      </ion-chip>
+    </div>
+  </div>
+
+  <div class="main-layout">
+    
+    <div *ngIf="filteredMatches.length === 0" class="ion-text-center ion-padding">
+      <p class="ion-text-muted">No hay partidos con este filtro.</p>
+    </div>
+
+    <div class="matches-grid">
+      <ion-card *ngFor="let match of filteredMatches" class="match-card">
+        <ion-card-content>
+          
+          <div class="match-header">
+            <ion-badge [color]="match.status === 'LIVE' ? 'danger' : (match.status === 'FINISHED' ? 'medium' : 'primary')">
+              {{ match.status === 'LIVE' ? 'EN JUEGO' : (match.status === 'FINISHED' ? 'FINAL' : 'HOY') }}
+            </ion-badge>
+            <span class="match-time" *ngIf="match.status === 'LIVE'">{{ match.time }}</span>
+            <span class="match-time" *ngIf="match.status === 'PENDING'">
+               {{ match.time | date:'HH:mm' }}
+            </span>
+          </div>
+
+          <div class="teams-container">
+            <div class="team">
+              <img 
+                [src]="match.homeTeamLogo" 
+                class="team-shield" 
+                alt="{{ match.homeTeam }}"
+                onError="this.onerror=null; this.src='assets/icon/favicon.png'">
+              <span class="team-name">{{ match.homeTeam }}</span>
+            </div>
+
+            <div class="score-board">
+              <h1 *ngIf="match.status !== 'PENDING'">
+                {{ match.homeScore }} - {{ match.awayScore }}
+              </h1>
+              <h1 *ngIf="match.status === 'PENDING'">VS</h1>
+            </div>
+
+            <div class="team">
+              <img 
+                [src]="match.awayTeamLogo" 
+                class="team-shield" 
+                alt="{{ match.awayTeam }}"
+                onError="this.onerror=null; this.src='assets/icon/favicon.png'">
+              <span class="team-name">{{ match.awayTeam }}</span>
+            </div>
+          </div>
+
+          <ion-button 
+            expand="block" 
+            fill="outline" 
+            size="small" 
+            class="ion-margin-top action-btn"
+            (click)="goToMatchDetail(match.id)">
+            {{ match.status === 'PENDING' ? 'Pronosticar' : 'Ver Detalles' }}
+          </ion-button>
+
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+</ion-content>

@@ -1,0 +1,41 @@
+<ion-content [fullscreen]="true" class="auth-bg">
+  <div class="auth-container">
+    <ion-card class="auth-card">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Bets Soccer</ion-card-title>
+        <ion-card-subtitle class="ion-text-center">Inicia Sesión</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          
+          <ion-input 
+            label="Email" 
+            labelPlacement="floating" 
+            fill="outline" 
+            type="email" 
+            formControlName="email" 
+            class="ion-margin-bottom">
+          </ion-input>
+
+          <ion-input 
+            label="Contraseña" 
+            labelPlacement="floating" 
+            fill="outline" 
+            type="password" 
+            formControlName="password" 
+            class="ion-margin-bottom">
+          </ion-input>
+
+          <ion-button expand="block" type="submit" [disabled]="loginForm.invalid" class="ion-margin-top">
+            Entrar
+          </ion-button>
+        </form>
+
+        <div class="ion-text-center ion-margin-top">
+          <p>¿No tienes cuenta? <a routerLink="/register">Regístrate aquí</a></p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,82 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary" class="header-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard" text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalles del Partido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-bg">
+  <div *ngIf="loading" class="ion-text-center ion-padding spinner-container">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <div *ngIf="!loading && match" class="main-container animate__animated animate__fadeIn">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="8">
+          
+          <div class="score-card">
+            <div class="team-block">
+              <img [src]="getLogo(match.homeTeam)" class="big-logo">
+              <h3>{{ match.homeTeam }}</h3>
+              <span class="badge-home">LOCAL</span>
+            </div>
+
+            <div class="score-block">
+              <h1 class="score">{{ match.homeScore }} - {{ match.awayScore }}</h1>
+              <div class="status-badge" [class.live]="match.status === 'LIVE' || match.status === 'live'">
+                {{ match.status === 'finished' ? 'FINALIZADO' : 'EN VIVO' }}
+              </div>
+            </div>
+
+            <div class="team-block">
+              <img [src]="getLogo(match.awayTeam)" class="big-logo">
+              <h3>{{ match.awayTeam }}</h3>
+              <span class="badge-away">VISITANTE</span>
+            </div>
+          </div>
+
+          <div class="section-title">Eventos destacados</div>
+          <div class="events-card">
+            <div class="event-row" *ngFor="let event of matchEvents">
+              <span class="event-minute">{{ event.minute }}'</span>
+              <img [src]="getLogo(event.teamName)" class="mini-logo">
+              <div class="event-info">
+                <span class="player-name">{{ event.player }}</span>
+                <span class="event-desc">¡Gol de {{ event.teamName }}!</span>
+              </div>
+              <span class="running-score">{{ event.runningScore }}</span>
+            </div>
+
+            <div *ngIf="matchEvents.length === 0" class="ion-text-center ion-padding text-muted">
+              Esperando eventos del partido...
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="12" size-md="4">
+          <div class="chat-container">
+            <div class="chat-header">Chat en Directo</div>
+            <div class="chat-messages">
+              <div class="message" *ngFor="let msg of chatMessages" [class.me]="msg.user === 'Yo'">
+                <div class="msg-bubble">
+                  <small class="msg-user">{{ msg.user }}</small>
+                  <p>{{ msg.text }}</p>
+                  <span class="msg-time">{{ msg.time }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="chat-input-area">
+              <ion-input placeholder="Escribe un mensaje..." [(ngModel)]="newMessage" (keyup.enter)="sendMessage()"></ion-input>
+              <ion-button (click)="sendMessage()" fill="clear">
+                <ion-icon slot="icon-only" name="paper-plane-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

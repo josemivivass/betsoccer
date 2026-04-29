@@ -1,0 +1,38 @@
+<ion-content [fullscreen]="true" class="auth-bg">
+  <div class="auth-container">
+    <ion-card class="auth-card">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Crear Cuenta</ion-card-title>
+        <ion-card-subtitle class="ion-text-center">Únete a Bets Soccer</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+          
+          <ion-item fill="outline" class="ion-margin-bottom">
+            <ion-label position="floating">Usuario</ion-label>
+            <ion-input type="text" formControlName="username"></ion-input>
+          </ion-item>
+
+          <ion-item fill="outline" class="ion-margin-bottom">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" formControlName="email"></ion-input>
+          </ion-item>
+
+          <ion-item fill="outline" class="ion-margin-bottom">
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
+
+          <ion-button expand="block" type="submit" [disabled]="registerForm.invalid" class="ion-margin-top">
+            Registrarse
+          </ion-button>
+        </form>
+
+        <div class="ion-text-center ion-margin-top">
+          <p>¿Ya tienes cuenta? <a routerLink="/login">Inicia Sesión</a></p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

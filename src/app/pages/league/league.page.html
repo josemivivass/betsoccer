@@ -1,0 +1,62 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title><b>La Liga</b> EA Sports</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-bg">
+  <ion-refresher slot="fixed" (ionRefresh)="loadStandings($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="table-container ion-padding-top">
+    <table class="league-table">
+      <thead>
+        <tr>
+          <th class="pos">#</th>
+          <th class="team">Club</th>
+          <th class="stat">PJ</th>
+          <th class="stat mobile-hide">V</th>
+          <th class="stat mobile-hide">E</th>
+          <th class="stat mobile-hide">D</th>
+          <th class="stat">DG</th>
+          <th class="pts">PTS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let team of standings; let i = index" 
+            [class.ucl]="i < 4" 
+            [class.uel]="i === 4" 
+            [class.relegation]="i >= 17"
+            style="cursor: pointer;"
+            (click)="goToTeamDetail(team.name)">
+          
+          <td class="pos">{{ i + 1 }}</td>
+          
+          <td class="team-cell">
+            <img [src]="getLogo(team.name)" 
+                 alt="logo" 
+                 class="mini-shield"
+                 onError="this.onerror=null; this.src='assets/icon/favicon.png'">
+            <span class="name">{{ team.name }}</span>
+          </td>
+
+          <td class="stat">{{ team.played }}</td>
+          <td class="stat mobile-hide">{{ team.won }}</td>
+          <td class="stat mobile-hide">{{ team.drawn }}</td>
+          <td class="stat mobile-hide">{{ team.lost }}</td>
+          <td class="stat">{{ team.goalsFor - team.goalsAgainst }}</td>
+          
+          <td class="pts">{{ team.points }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="!loading && standings.length === 0" class="ion-text-center ion-padding">
+      <p>No hay datos de clasificación disponibles.</p>
+    </div>
+  </div>
+</ion-content>
